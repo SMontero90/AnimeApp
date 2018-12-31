@@ -1,0 +1,21 @@
+.card-container {
+  background: #DDDDDA;
+  border-radius: 4px;
+  break-inside: avoid-column;
+  overflow: hidden;
+  margin-bottom: 15px;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  &__title {
+    padding: 0 10px;
+    color: #7697A0;
+  }
+}

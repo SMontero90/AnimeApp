@@ -1,0 +1,16 @@
+<div class="carousel-container">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li ng-repeat="character  in carousel.carouselData.characters | filter: {role: 'Main'}" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{'active': $index === 0}"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item" ng-class="{'active': $index === 0}" ng-repeat="character  in carousel.carouselData.characters | filter: {role: 'Main'}">
+        <img ng-src="{{character['image_url']}}">
+        <div class="carousel-caption">
+          <h3 ng-bind="character['name']"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

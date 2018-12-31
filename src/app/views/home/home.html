@@ -1,0 +1,27 @@
+<div class="home-container">
+  <h2 ng-bind="::'Select a day to see the schedule:'"></h2>
+
+  <div class="btn-group btn-group-justified hidden-xs" role="group" aria-label="Selecciona el día">
+    <div class="btn-group" role="group" ng-repeat="day in home.DAYS">
+      <button type="button" class="btn btn-default text-capitalize" ng-class="{'active': home.currentDay === day}" ng-bind="day" ng-click="home.getScheduleByDay(day)"></button>
+    </div>
+  </div>
+
+  <div class="btn-group-vertical visible-xs" role="group" aria-label="Selecciona el día">
+    <div class="btn-group" role="group" ng-repeat="day in home.DAYS">
+      <button type="button" class="btn btn-default text-capitalize" ng-class="{'active': home.currentDay === day}" ng-bind="day" ng-click="home.getScheduleByDay(day)"></button>
+    </div>
+  </div>
+
+  <div ng-if="!home.loading" class="home-container__cards">
+    <card-anime-component ng-repeat="data in home.animeData" anime-data="data"></card-anime-component>
+  </div>
+
+  <div ng-if="home.loading" class="loading-item"><div></div><div></div><div></div><div></div></div>
+
+  <div ng-if="!home.loading && home.serviceError" class="bg-danger home-container__error col-xs-12 col-sm-10 col-sm-offset-1 text-center">
+    <span class="glyphicon glyphicon-fire"></span>
+    <span>Error al cargar la Programación del día <b class="text-capitalize">{{home.currentDay}}</b>, inténtalo nuevamente!</span>
+  </div>
+
+</div>

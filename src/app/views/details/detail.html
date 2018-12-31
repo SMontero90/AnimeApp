@@ -1,0 +1,80 @@
+<div class="detail-container row">
+  <div ng-if="!detail.loading" class="col-xs-12">
+    <div class="row ">
+      <div class="col-xs-12">
+        <div class="row detail-container__header">
+          <div class="col-xs-12 col-sm-6 detail-container__stats-left">
+            <h1 ng-bind="::detail.animeData['title']"></h1>
+            <h3 ng-bind="'(Title in English: ' + detail.animeData['title_english'] + ')'"></h3>
+          </div>
+          <div class="col-xs-12 col-sm-6 detail-container__stats-right">
+            <div>
+              <span class="glyphicon glyphicon-thumbs-up"></span><span ng-bind="::(' (' + detail.animeData['score'] + ' by ' + detail.animeData['scored_by'] + ' users)')"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-stats"></span> <span ng-bind="::detail.animeData['status']"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-facetime-video"></span> <span ng-bind="::detail.animeData['rating']"></span>
+            </div>
+            <a class="btn btn-primary" href="/">
+              <span class="badge"><span class="glyphicon glyphicon-chevron-left"></span></span> Go Back
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4 col-md-3 detail-container__image-container">
+        <img ng-src="{{::detail.animeData['image_url']}}">
+        <div class="detail-container__footer-image">
+          <p> {{::(detail.animeData['synopsis'] | limitTo:150)}}{{::(detail.animeData['synopsis'].length > 150 ? '...' : '')}}</p>
+        </div>
+      </div>
+
+      <div class="col-xs-12 visible-xs">
+        <hr>
+      </div>
+
+      <div class="col-xs-12 col-sm-8 col-md-9 detail-container__trailer">
+        <iframe ng-src="{{detail.trustSrc(detail.animeData['trailer_url'])}}" width="100%" height="320" frameborder="0" alt="There is no Trailer for this Anime :(." allowfullscreen></iframe>
+        <h2 ng-bind="::'Take a look to the Trailer!'"></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <carousel-component carousel-data="detail.charactersData"></carousel-component>
+      </div>
+
+      <div ng-if="detail.episodesData.episodes.length !== 0" class="col-xs-12 col-sm-8 col-md-9">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2 class="text-center" ng-bind="::'List of episodes:'"></h2>
+          </div>
+          <div ng-if="detail.episodesData['episodes_last_page'] > 1" class="col-xs-12">
+            <h3 class="text-center" ng-bind="::'Select page to load episodes:'"></h3>
+            <div class="btn-group btn-group-justified hidden-xs" role="group">
+              <div class="btn-group" role="group" ng-repeat="page in [].constructor(detail.episodesData['episodes_last_page']) track by $index">
+                <button type="button" class="btn btn-default" ng-class="{'active': ($index + 1) === detail.currentPage}" ng-bind="$index + 1" ng-click="detail.getEpisodesByPage($index + 1)"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div ng-if="!detail.loadingEpisodes" class="detail-container__episodes">
+              <ul>
+                <li ng-repeat="episode in detail.episodesData.episodes | orderBy: 'episode_id'" title="{{episode.title}}"><a href="{{episode['video_url']}}" target="_blank">{{::(episode.title | limitTo: 20)}}{{::(episode.title.length > 20 ? '...' : '')}}</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-12">
+              <div ng-if="detail.loadingEpisodes" class="loading-item"><div></div><div></div><div></div><div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div ng-if="detail.loading" class="loading-item"><div></div><div></div><div></div><div></div></div>
+  </div>
+</div>

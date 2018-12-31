@@ -1,0 +1,21 @@
+.home-container {
+
+  &__error {
+    margin-top: 100px;
+    padding: 20px;
+  }
+
+  &__cards {
+    margin-top: 20px;
+    column-count: 2;
+    @media screen and (min-width: 576px) {
+      column-count: 3;
+    }
+    @media screen and (min-width: 768px) {
+      column-count: 4;
+    }
+    @media screen and (min-width: 992px) {
+      column-count: 5;
+    }
+  }
+}
