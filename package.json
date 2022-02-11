@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@webpack-cli/serve": "^0.1.2",
-    "ajv": "^6.4.0",
+    "ajv": "^6.12.3",
     "angular-mocks": "^1.7.5",
     "autoprefixer": "^9.4.3",
     "babel-core": "^6.26.3",
